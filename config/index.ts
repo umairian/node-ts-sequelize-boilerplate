@@ -43,7 +43,7 @@ var config = convict({
     password: {
       doc: "db password",
       format: "*",
-      default: null,
+      default: "",
       env: "DATABASE_PASSWORD",
     },
   },
