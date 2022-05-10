@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize/types";
 import moment from "moment";
 
 export default (sequelize: Sequelize) => {
-    const User = sequelize.define("users", {
+    const Shop = sequelize.define("shops", {
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -14,23 +14,13 @@ export default (sequelize: Sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
           },
-          email: {
+          fk_user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+          },
+          description: {
             type: DataTypes.STRING,
             allowNull: false,
-          },
-          phone_number: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          },
-          status: {
-            type: DataTypes.ENUM("Pending", "Approved", "Rejected"),
-            allowNull: false,
-            defaultValue: "Pending",
-          },
-          archived: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
           },
           createdAt: {
             allowNull: false,
@@ -42,14 +32,14 @@ export default (sequelize: Sequelize) => {
           },
     });
 
-    User.beforeCreate((user: any) => {
-        user.dataValues.createdAt = moment().unix();
-        user.dataValues.updatedAt = moment().unix();
-      });
+    Shop.beforeCreate((shop: any) => {
+      shop.dataValues.createdAt = moment().unix();
+      shop.dataValues.updatedAt = moment().unix();
+    });
     
-      User.beforeUpdate((user: any) => {
-        user.dataValues.updatedAt = moment().unix();
-      });
+    Shop.beforeUpdate((shop: any) => {
+      shop.dataValues.updatedAt = moment().unix();
+    });
 
-    return User;
+    return Shop;
 };
