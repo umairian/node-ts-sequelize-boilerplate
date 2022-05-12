@@ -1,11 +1,12 @@
 import express from "express";
+import { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
 import expressLogger from "express-bunyan-logger";
 import cors from "cors";
 import config from "./config";
 import router from "./routes";
 
-const app = express();
+const app: Application = express();
 
 // Using body parser
 app.use(bodyParser.json({ limit: "10mb" }));
@@ -36,7 +37,7 @@ app.use(
 app.use(cors());
 
 // Test route
-app.get("/api/test", (req, res) => {
+app.get("/api/test", (req: Request, res: Response) => {
     res.status(200).send(`Release ${config.get("version")}`);
 });
 
@@ -44,7 +45,7 @@ app.get("/api/test", (req, res) => {
 app.use("/api", router);
 
 // Handling invalid, 404 requests
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
     return res.status(404).send("Invalid route, Route not found");
 });
 

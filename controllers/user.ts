@@ -1,7 +1,10 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
+import Models from "../models";
+const { Users } = Models;
 
 export default {
-    get: (req: Request, res: Response) => {
-        res.status(200).send("Success!")
+    get: async (req: Request, res: Response) => {
+        console.log(Users);
+        res.status(200).json("Sunccess")
     }
 }
